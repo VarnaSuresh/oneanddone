@@ -7,6 +7,7 @@ import json
 import pytest
 import requests
 
+from faker import Factory
 
 @pytest.fixture(scope='session')
 def session_capabilities(session_capabilities):
@@ -53,6 +54,10 @@ def new_user(persona_test_user):
 def base_url(base_url, request):
     return base_url or request.getfuncargvalue("live_server").url
 
+@pytest.fixture(scope='session')
+def random_title():
+    fake = Factory.create()
+    return fake.name()
 
 @pytest.fixture(scope='function')
 def is_local(base_url):
