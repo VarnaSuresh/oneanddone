@@ -6,42 +6,34 @@ import pytest
 
 from pages.home import HomePage
 
-from selenium.webdriver.common.by import By
-
 
 class TestAvailableTasks():
     @pytest.mark.nondestructive
     def test_create_tasks(self, base_url, selenium, task, random_title):
 
-        admin_user = {  'email': "varna.suresh@outlook.com",
-                        'password': "varna123",
-                        'name': "Varna",
-                        'username': "Varna",
-                        'url': 'http://www.mozilla.org/'
+        admin_user = {'email': "varna.suresh@outlook.com",
+                      'password': "varna123",
+                      'name': "Varna",
+                      'username': "Varna",
+                      'url': 'http://www.mozilla.org/'
         }
 
         home_page = HomePage(selenium, base_url).open()
         assert not home_page.is_user_logged_in
-
         edit_profile = home_page.login(admin_user)
         assert edit_profile.is_user_logged_in
-         
-        available_tasks_page = home_page.click_available_tasks()
+        home_page.click_available_tasks()
         home_page.click_create_task(random_title)
 
-    
     @pytest.mark.nondestructive
     def test_assign_tasks(self, base_url, selenium, task, new_user, random_title):
-        home_page= HomePage(selenium, base_url).open()
+        home_page = HomePage(selenium, base_url).open()
         assert not home_page.is_user_logged_in
-        
-        edit_profile = home_page.login(new_user)
-        
+        home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
         assert available_tasks_page.is_available_tasks_list_visible
-        assert len(available_tasks_page.available_tasks) > 0        
-
-        search_text = home_page.search_for_task(random_title) 
+        assert len(available_tasks_page.available_tasks) > 0
+        home_page.search_for_task(random_title)
         task = available_tasks_page.available_tasks[0]
         task_name = task.name
         task_details = task.click()
@@ -56,13 +48,10 @@ class TestAvailableTasks():
     def test_reassign_task(self, base_url, selenium, task, new_user, random_title):
         home_page = HomePage(selenium, base_url).open()
         assert not home_page.is_user_logged_in
-
         edit_profile = home_page.login(new_user)
         assert edit_profile.is_user_logged_in
-
         available_tasks_page = home_page.click_available_tasks()
         assert available_tasks_page.is_available_tasks_list_visible
         assert len(available_tasks_page.available_tasks) > 0
-  
-        search_text = home_page.search_for_task(random_title) 
+        home_page.search_for_task(random_title)
         assert len(available_tasks_page.available_tasks) == 0
