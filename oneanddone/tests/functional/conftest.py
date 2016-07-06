@@ -74,7 +74,7 @@ def task(base_url, is_local):
 
 
 @pytest.fixture(scope='function')
-def nonrepeatable_assigned_task(base_url, is_local, new_user):
+def nonrepeatable_assigned_task(base_url, is_local):
     if is_local:
         from oneanddone.tasks.tests import TaskFactory, TaskAttemptFactory
         from oneanddone.tasks.models import TaskAttempt
