@@ -79,4 +79,4 @@ def nonrepeatable_assigned_task(base_url, is_local, new_user):
         from oneanddone.tasks.tests import TaskFactory
         return TaskFactory.create(
             repeatable=False,
-            taskattempt_set={"user": new_user.email, "state": 1})
+            taskattempt_set={"user": new_user['email'], "state": 1})
