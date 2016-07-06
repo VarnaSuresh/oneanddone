@@ -9,9 +9,14 @@ from pages.home import HomePage
 
 class TestAvailableTasks():
     @pytest.mark.nondestructive
-    def test_assign_tasks(self, base_url, selenium, nonrepeatable_assigned_task, new_user):
+    def test_assign_tasks(self, base_url, selenium, nonrepeatable_assigned_task, task, new_user):
         home_page = HomePage(selenium, base_url).open()
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
+
+        # Check if assignable task is found
+        home_page.search_for_task(task.name)
+        assert len(available_tasks_page.available_tasks)
+
         home_page.search_for_task(nonrepeatable_assigned_task.name)
         assert len(available_tasks_page.available_tasks) == 0
