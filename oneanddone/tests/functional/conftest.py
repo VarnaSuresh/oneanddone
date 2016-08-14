@@ -77,7 +77,7 @@ def task(base_url, is_local):
 def assigned_task(base_url, is_local):
     if is_local:
         from oneanddone.tasks.tests import TaskFactory, TaskAttemptFactory
-        from oneanddone.task.user import UserFactory
+        from oneanddone.users.tests import UserFactory
         from oneanddone.tasks.models import TaskAttempt
         task = TaskFactory.create(repeatable=False)
         user = UserFactory.create()
