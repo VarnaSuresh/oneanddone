@@ -76,8 +76,9 @@ def task(base_url, is_local):
 @pytest.fixture(scope='function')
 def assigned_task(base_url, is_local):
     if is_local:
-        from oneanddone.tasks.tests import TaskFactory, TaskAttemptFactory, TaskAttempt
+        from oneanddone.tasks.tests import TaskFactory, TaskAttemptFactory
         from oneanddone.task.user import UserFactory
+        from oneanddone.tasks.models import TaskAttempt
         task = TaskFactory.create(repeatable=False)
         user = UserFactory.create()
         TaskAttemptFactory.create(
