@@ -16,8 +16,7 @@ class TestAvailableTasks():
         available_tasks_page = home_page.click_available_tasks()
         home_page.search_for_task(assigned_task['task'].name)
         assert len(available_tasks_page.available_tasks) == 0
-        from nose.tools import eq_
-        eq_(assigned_task['task'].is_available_to_user(assigned_task['user']), True)
+        assert assigned_task['task'].is_available_to_user(assigned_task['user']) == True
 
     @pytest.mark.nondestructive
     def test_that_unassigned_task_is_available(self, base_url, selenium, task, new_user):
