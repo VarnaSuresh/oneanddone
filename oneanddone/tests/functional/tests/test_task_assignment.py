@@ -15,10 +15,10 @@ class TestAvailableTasks():
         available_tasks = [x.name for x in available_tasks_page.available_tasks]
         assert available_tasks.count(assigned_task.name) == 0
 
-    def test_assigned_task_is_not_available(self, base_url, selenium, assigned_task):
+    def test_assigned_task_is_available_to_assignee(self, base_url, selenium, assigned_task):
         home_page = HomePage(selenium, base_url).open()
         new_user = {
-            'email': assigned_task['user'].bugzilla_email,
+            'email': assigned_task['user'].email,
             'password': assigned_task['user'].password,
             'name': assigned_task['user'].name,
             'username': assigned_task['user'].username,
