@@ -22,4 +22,5 @@ class TestAvailableTasks():
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
         home_page.search_for_task(task.name)
-        assert len(available_tasks_page.available_tasks)
+        available_tasks = x.name for x in available_tasks_page.available_tasks
+        assert available_tasks.count(task.name) == 1
