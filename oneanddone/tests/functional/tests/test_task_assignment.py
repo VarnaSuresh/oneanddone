@@ -9,7 +9,6 @@ from pages.home import HomePage
 
 class TestAvailableTasks():
 
-    @pytest.mark.nondestructive
     def test_assigned_task_is_not_available(self, base_url, selenium, assigned_task, new_user):
         home_page = HomePage(selenium, base_url).open()
         home_page.login(new_user)
@@ -18,7 +17,6 @@ class TestAvailableTasks():
         assert len(available_tasks_page.available_tasks) == 0
         assert assigned_task['task'].is_available_to_user(assigned_task['user']) == True
 
-    @pytest.mark.nondestructive
     def test_that_unassigned_task_is_available(self, base_url, selenium, task, new_user):
         home_page = HomePage(selenium, base_url).open()
         home_page.login(new_user)
