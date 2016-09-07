@@ -79,12 +79,10 @@ def assigned_task(base_url, is_local):
         from oneanddone.tasks.tests import TaskFactory, TaskAttemptFactory
         from oneanddone.users.tests import UserFactory
         from oneanddone.tasks.models import TaskAttempt
-        task = TaskFactory.create(repeatable=False)
-        user = UserFactory.create()
         from faker import Factory
         fake = Factory.create()
-        user.email = fake.email()
-        user.password = fake.word()
+        task = TaskFactory.create(repeatable=False)
+        user = UserFactory.create(email=fake.email(), password=fake.word())
         TaskAttemptFactory.create(
             user=user,
             state=TaskAttempt.STARTED,

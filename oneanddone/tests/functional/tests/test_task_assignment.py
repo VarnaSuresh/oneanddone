@@ -12,8 +12,7 @@ class TestAvailableTasks():
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
         home_page.search_for_task(assigned_task['task'].name)
-        available_tasks = [x.name for x in available_tasks_page.available_tasks]
-        assert available_tasks.count(assigned_task['task'].name) == 0
+        assert len(available_tasks_page.available_tasks) == 0
 
     def test_assigned_task_is_available_to_assignee(self, base_url, selenium, assigned_task):
         home_page = HomePage(selenium, base_url).open()
@@ -24,13 +23,11 @@ class TestAvailableTasks():
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
         home_page.search_for_task(assigned_task['task'].name)
-        available_tasks = [x.name for x in available_tasks_page.available_tasks]
-        assert available_tasks.count(assigned_task.name) == 1
+        assert len(available_tasks_page.available_tasks) == 1
 
     def test_that_unassigned_task_is_available(self, base_url, selenium, task, new_user):
         home_page = HomePage(selenium, base_url).open()
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
         home_page.search_for_task(task.name)
-        available_tasks = [x.name for x in available_tasks_page.available_tasks]
-        assert available_tasks.count(task.name) == 1
+        assert len(available_tasks_page.available_tasks) == 1

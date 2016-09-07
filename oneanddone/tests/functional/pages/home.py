@@ -56,5 +56,5 @@ class HomePage(Base):
 
     def search_for_task(self, task_name):
         search_text = self.find_element(*self._search_button_locator)
-        search_text.send_keys(task_name)
+        search_text.send_keys('\'' + task_name + '\'')
         search_text.send_keys(Keys.RETURN)
