@@ -85,8 +85,6 @@ def assigned_task(base_url, is_local):
         fake = Factory.create()
         user.email = fake.email()
         user.password = fake.word()
-        user.display_name = fake.name()
-        user.username = fake.user_name()
         TaskAttemptFactory.create(
             user=user,
             state=TaskAttempt.STARTED,

@@ -20,9 +20,6 @@ class TestAvailableTasks():
         new_user = {
             'email': assigned_task['user'].email,
             'password': assigned_task['user'].password,
-            'name': assigned_task['user'].display_name,
-            'username': assigned_task['user'].username,
-            'url': 'http://www.mozilla.org/'
         }
         home_page.login(new_user)
         available_tasks_page = home_page.click_available_tasks()
